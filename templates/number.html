@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+<body>
+    <h1>The number you searched for was {{ number }}</h1>
+    <h4>The square root of {{ number }} is {{ root }}</h4>
+
+    <h4>{{ number }}{{ primeMessage }}</h4>
+
+    <ul>
+        <li><h4>DIVISORS OF {{ number }}</h4></li>
+        {% for d in divisorList %}
+            <li> <a href="/{{d}}"> {{d}} </a> </li>
+            
+        {% endfor %}
+    </ul>
+
+
+
+
+
+</body>
+</html>
