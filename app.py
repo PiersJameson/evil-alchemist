@@ -8,7 +8,7 @@ def hello():
 @app.route('/numberstuff', methods=["POST"])
 def numberStuff():
     number = request.form.get("number")
-    print(number)
+    return number
 
 if __name__ == '__main__':
     app.run()
