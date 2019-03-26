@@ -1,10 +1,25 @@
 from flask import Flask, render_template, request, redirect
 from math import sqrt
 from prime import divisors
+from flask_sqlalchemy import SQLAlchemy
 import string
 
-
+# Instantiate a flask app
 app = Flask(__name__)
+
+# Configure and instantiate MYSQL connection
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://piersjameson:My MySQL pass.@piersjameson.mysql.pythonanywhere-services.com/piersjameson$default'
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+
+    def __repr__(self):
+        return '<User %r>' % self.username
+
+
 
 #Create the main route or pass POSTs onto the number facts route
 @app.route('/', methods=["GET", "POST"])
