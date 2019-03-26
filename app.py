@@ -8,7 +8,7 @@ import string
 app = Flask(__name__)
 
 # Configure and instantiate MYSQL connection
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://piersjameson:My MySQL pass.@piersjameson.mysql.pythonanywhere-services.com/piersjameson$default'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://piersjameson:My MySQL pass.@piersjameson.mysql.pythonanywhere-services.com/piersjameson$default'
 db = SQLAlchemy(app)
 
 class User(db.Model):
