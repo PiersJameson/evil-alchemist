@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect
 from math import sqrt
 from prime import divisors
+import string
+
 
 app = Flask(__name__)
 
@@ -10,8 +12,14 @@ def hello():
     
     # POST requests should respond with number facts
     if request.method == "POST":
-        number = request.form["number"]
-        url = "".join(["/", str(number)])
+        number = list(request.form["number"])
+
+        # Strip out anything that's not an integer number
+        strippedNumber = [n for n in number if str(string.digits.find(n)) == n]
+        strippedNumber = "".join(strippedNumber)
+
+        # Redirect to url created from sanitized, strippedNumber
+        url = "".join(["/", strippedNumber])
         return redirect(url)
     
     # GET requests should respond with the index page
@@ -41,6 +49,13 @@ def numberReturn(number):
 
     # Render the page, passing along number, divisorList, root, warning, and primality message.
     return render_template("number.html",number=number,divisorList=divisorList,root=root,primeMessage=primeMessage,warning=warning)
+
+# Handle a string being submitted instead of a number
+@app.route('/string:urlString')
+def stringHandler():
+    return redirect("/")
+
+
 
 if __name__ == '__main__':
     app.run()
